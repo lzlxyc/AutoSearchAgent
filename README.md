@@ -1,30 +1,155 @@
 # AutoSearchAgent
-## 简介
-- 自动搜索的agent，自动判断是否需要联网进行搜索
-- 目前只搜索只支持通过知乎进行搜索，并对搜到的数据进行爬取
 
-## 运行
-- 在根目录下配置好.env文件，包括一些：
-  - 大模型的api_key
-  - 外部函数的api_key，比如google引擎
-  - 爬虫相关配置(cookit、header)
-  - 项目的配置：保存的数据等信息
-- 在pycharm中直接运行./auto_search/main.py文件；如果是用命令运行脚本，可能需要修改一些路径的配置
+<div align="center">
 
-## 整体框架
-- 用户问题输入
-- 一个关键词提炼模型：将用户输入的问题进行关键词提取
-- 一个判别模型：判断对于用户的输入是否需要调用谷歌搜索：不需要调用谷歌搜索，直接返回大模型生成的答案，否则调用谷歌搜索
-- 将谷歌搜索的结果进行清洗（此时是一些网址）:清洗出目标网站的网址，得到网址数据
-- 通过网址数据（url）进行爬虫、请求等操作，得到目标数据
-- 将目标数据拼接到提示词一起给大模型，得到输入问题的最终输出答案
+![GitHub](https://img.shields.io/badge/version-1.0.0-blue)
+![Python](https://img.shields.io/badge/python-3.8%2B-green)
+![License](https://img.shields.io/badge/license-MIT-orange)
 
-## 目前实现
-- 大模型问答agent，遇到超出知识范围就进行联网搜索，搜到的内容进行自动爬取、保存；最后生成报告；
+**智能搜索代理 | 自动判断搜索需求 | 智能爬取与分析**
 
-## 下一步
-- 1、开发可视化界面
-- 2、开发app服务调用
+</div>
+
+## 📖 简介
+
+AutoSearchAgent 是一个智能搜索代理系统，能够自动判断用户问题是否需要联网搜索，并智能地进行信息检索、爬取和分析。目前主要支持通过知乎平台进行搜索和数据获取。
+
+## 🚀 核心特性
+
+- 🤖 **智能判断** - 自动识别问题是否需要联网搜索
+- 🔍 **多渠道搜索** - 支持搜索引擎集成（当前只支持知乎）
+- 📊 **数据爬取** - 自动获取和分析搜索结果
+- 💾 **数据持久化** - 智能保存搜索记录和结果
+- 🧠 **大模型集成** - 结合AI模型进行智能问答
+
+## ⚡ 快速开始
+
+### 环境配置
+
+1. **克隆项目**
+```bash
+git clone https://github.com/lzlxyc/AutoSearchAgent.git
+cd AutoSearchAgent
+```
+
+2. **配置环境变量**
+在项目根目录创建 `.env` 文件，配置以下参数：
+
+```env
+# 大模型API-KEY配置
+DS_API_KEY=
+DS_API_URL=https://api.deepseek.com
+
+# 外部函数API-KEY配置
+GOOGLE_SEARCH_KAY=
+CSE_ID=
+
+# Google搜索网路相关配置
+COOKIE=
+USER_AGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+
+# 项目配置：
+# 1、保存的数据地址
+SAVE_DATA_DIR=../search_data
+```
+
+3. **安装依赖**
+```bash
+pip install -r requirements.txt
+```
+
+### 运行方式
+**PyCharm 用户：**
+- 直接运行 `./auto_search/main.py`
+
+**命令行用户：**
+- python auto_search/main.py
+
+**具体模块调用**
+```python
+from auto_search_agent import AutoSearchAgent
+
+if __name__ == '__main__':
+    auto_search = AutoSearchAgent()
+    auto_search.chat('请帮我介绍一下RLHF算法的相关知识')
+```
+
+## 🏗️ 系统架构
+```text
+用户问题输入
+    ↓
+关键词提炼模型
+    ↓
+判断模型 → 无需搜索 → 直接生成答案
+    ↓
+需要搜索
+    ↓
+调用搜索引擎
+    ↓
+搜索结果清洗
+    ↓
+目标网站爬取
+    ↓
+数据提取与处理
+    ↓
+智能答案生成
+    ↓
+最终输出
+```
+
+## 🔧 核心模块
+
+### 1. 关键词提取模块
+- 智能分析用户问题
+- 提取核心搜索关键词
+
+### 2. 搜索判断模块
+- 基于大模型智能判断搜索需求
+- 优化搜索策略选择
+
+### 3. 数据爬取模块
+- 自动化网页爬取
+- 智能数据清洗和提取
+
+### 4. 答案生成模块
+- 结合上下文生成精准答案
+- 支持多种输出格式
+
+## 📈 当前功能
+
+✅ **智能问答系统** - 基于大模型的对话能力  
+✅ **自动搜索触发** - 智能识别知识边界  
+✅ **数据爬取保存** - 自动化信息收集  
+✅ **报告生成** - 结构化结果输出  
+
+## 🎯 开发计划
+
+### 短期目标
+- [ ] **可视化界面开发** - 提供友好的用户交互界面
+- [ ] **API服务封装** - 支持外部系统调用
+
+### 长期规划
+- [ ] 多平台搜索支持（百度、谷歌等）
+- [ ] 高级数据分析功能
+- [ ] 实时搜索监控
+- [ ] 个性化搜索配置
 
 
+## 📄 许可证
 
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+
+## 📞 联系我们
+
+- 项目主页：https://github.com/lzlxyc/AutoSearchAgen
+- 问题反馈：https://github.com/lzlxyc/AutoSearchAgen/issues
+- 邮箱：lzl_xyc@163.com
+
+---
+
+<div align="center">
+
+**如果这个项目对你有帮助，请给个 ⭐️ 支持一下！**
+
+</div>
+```
