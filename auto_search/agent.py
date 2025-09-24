@@ -2,10 +2,11 @@ import os
 import json
 
 
-from config import SAVE_DATA_DIR
-from llms_api import LlmBox
-from tools import identify_model, convert_keyword
-from function_calls import get_answer, SupportFunctionCallList
+from auto_search.config import SAVE_DATA_DIR
+from auto_search.api.llms import LlmBox
+from auto_search.utils.tools import identify_model, convert_keyword
+from auto_search.api.search import get_answer, SupportFunctionCallList
+
 
 class AutoSearchAgent:
     def __init__(self):
@@ -101,12 +102,11 @@ class AutoSearchAgent:
         '''
         if use_keyword:
             query = convert_keyword(query, self.llm_box)
-            print(f">>> 🤖: 提取到搜索关键词:{query}")
+            print(f" 🤖: 提取到搜索关键词:{query}")
 
         # 调用判别模型
-        if (response:= identify_model(query, llm_box=self.llm_box)) is not None:
-            print(f">>> 🤖: {response}")
-            return response
+        if (answer:= identify_model(query, llm_box=self.llm_box)) is not None:
+            return answer
 
         if use_search:
             tool_choice = {"type": "function","function": {"name": "get_answer"}}
@@ -133,13 +133,13 @@ class AutoSearchAgent:
         messages.append({"role": "user", "content": query})
 
         while True:
-            print(f">>> 👤: {query}")
+            print(f" 👤: {query}")
             answer = self.sample_run(query)
-            print(f">>> 🤖: {answer}")
+            print(f" 🤖: {answer}")
 
             # 询问用户是否还有其他问题
-            query = input(">>> 🤖: 您还有其他问题吗？(输入退出以结束对话): ")
-            if query == "退出":
+            query = input(" 🤖: 您还有其他问题吗？(输入q以结束对话): ")
+            if query in ['q', 'Q']:
                 del messages
                 break
 

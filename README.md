@@ -33,8 +33,12 @@ cd AutoSearchAgent
 ```
 
 2. **配置环境变量**
-在项目根目录创建 `.env` 文件，配置以下参数：
+- 在项目根目录中，将`.env.example`重命名为 `.env` 文件，配置以下参数：
+```shell
+cp .env.example .env
+```
 
+- 在.env文件中配置相关参数
 ```env
 # 大模型API-KEY配置
 DS_API_KEY=
@@ -62,15 +66,13 @@ pip install -r requirements.txt
 ```
 
 ### 运行方式
-**PyCharm 用户：**
-- 直接运行 `./auto_search/main.py`
-
-**命令行用户：**
-- python auto_search/main.py
+```shell
+cd scripts & python ./main.py
+```
 
 **具体模块调用**
 ```python
-from auto_search_agent import AutoSearchAgent
+from auto_search import AutoSearchAgent
 
 if __name__ == '__main__':
     auto_search = AutoSearchAgent()

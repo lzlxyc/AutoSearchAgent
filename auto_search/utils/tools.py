@@ -2,10 +2,11 @@ import json
 import requests
 from lxml import etree
 
-from config import SAVE_DATA_DIR
-from llms_api import LlmBox
-from utils import generate_random_key, windows_compatible_name
-from config import google_search_key, cse_id, headers
+from ..config import SAVE_DATA_DIR
+from ..api.llms import LlmBox
+from .helpers import generate_random_key, windows_compatible_name
+from ..config import google_search_key, cse_id, headers
+
 
 def convert_keyword(query:str, llm_box: LlmBox) -> str:
     '''将用户输入的问题转化为适合在google上进行搜索的关键词
@@ -49,6 +50,7 @@ def identify_model(query:str, llm_box: LlmBox) -> str | None:
         return None
     else:
         return result
+
 
 
 def google_search(query:str, num_results:int=3, site_url=None) -> list[dict]:

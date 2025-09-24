@@ -1,8 +1,8 @@
 import os
 import json
 
-from config import SAVE_DATA_DIR
-from tools import get_search_text, google_search
+from ..config import SAVE_DATA_DIR
+from ..utils.tools import get_search_text, google_search
 
 
 def get_answer(query:str):
