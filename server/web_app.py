@@ -1,6 +1,5 @@
 import streamlit as st
 import sys
-import os
 import time
 
 # 添加项目根目录到Python路径
