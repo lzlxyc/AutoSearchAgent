@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv('../.env')
 
-google_search_key = os.getenv("GOOGLE_SEARCH_KAY")
+google_search_key = os.getenv("GOOGLE_SEARCH_KEY")
 cse_id = os.getenv("CSE_ID")
 cookie = os.getenv('COOKIT')
 user_agent = os.getenv('USER_AGENT')

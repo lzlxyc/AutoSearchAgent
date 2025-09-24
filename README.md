@@ -41,7 +41,7 @@ DS_API_KEY=
 DS_API_URL=https://api.deepseek.com
 
 # 外部函数API-KEY配置
-GOOGLE_SEARCH_KAY=
+GOOGLE_SEARCH_KEY=
 CSE_ID=
 
 # Google搜索网路相关配置
@@ -52,6 +52,9 @@ USER_AGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, 
 # 1、保存的数据地址
 SAVE_DATA_DIR=../search_data
 ```
+- [cookit获取方式请点击此处](assets/cookit获取.png)
+- google_search_key获取方式: https://blog.csdn.net/whatday/article/details/113750998
+
 
 3. **安装依赖**
 ```bash
