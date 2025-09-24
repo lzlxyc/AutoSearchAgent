@@ -66,9 +66,15 @@ pip install -r requirements.txt
 ```
 
 ### 运行方式
+- 本地验证
 ```shell
 cd scripts & python ./main.py
 ```
+- web可视化问答
+```shell
+cd server & python -m streamlit run app.py
+```
+
 
 **具体模块调用**
 ```python
